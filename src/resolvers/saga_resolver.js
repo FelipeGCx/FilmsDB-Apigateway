@@ -10,7 +10,8 @@ const sagaResolver = {
 	Mutation: {
 		createSaga: (_, { sagaInput }, { dataSources }) => {
 			const saga = {
-				saga: sagaInput.saga
+				saga: sagaInput.saga,
+				svg: sagaInput.svg
 			};
 			return dataSources.sagaAPI.createSaga(saga);
 		},

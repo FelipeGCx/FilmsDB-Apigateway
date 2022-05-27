@@ -10,7 +10,8 @@ const categoryResolver = {
 	Mutation: {
 		createCategory: (_, { categoryInput }, { dataSources }) => {
 			const category = {
-				category: categoryInput.category
+				category: categoryInput.category,
+				svg: categoryInput.svg
 			};
 			return dataSources.categoryAPI.createCategory(category);
 		},
