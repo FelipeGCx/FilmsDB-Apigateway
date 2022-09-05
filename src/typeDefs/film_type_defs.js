@@ -1,89 +1,126 @@
-const { gql } = require('apollo-server');
+const { gql } = require("apollo-server");
 const filmTypeDefs = gql`
-	type CategoryDetail {
-		id: Int!
-		category: String!
-		svg: String!
-	}
+  input FilmInput {
+    type: String!
+    titleOG: String!
+    title: String!
+    year: Int!
+    note: Float!
+    language: Boolean!
+    favorite: Boolean!
+    category: Int!
+    info: String!
+    poster: String!
+    season: Int!
+    link: String!
+    saga: Int!
+  }
 
-	type SagaDetail {
-		id: Int!
-		saga: String!
-		svg: String!
-	}
+  input FilmInputUpdate {
+    type: String
+    titleOG: String
+    title: String
+    year: Int
+    note: Float
+    language: Boolean
+    favorite: Boolean
+    category: Int
+    info: String
+    poster: String
+    season: Int
+    link: String
+    saga: Int
+  }
 
-	type FilmDetail {
-		id: Int!
-		type: String!
-		titleOG: String!
-		title: String!
-		year: Int!
-		note: Float!
-		language: Boolean!
-		favorite: Boolean!
-		category: CategoryDetail!
-		info: String!
-		poster: String!
-		season: Int!
-		link: String!
-		saga: SagaDetail!
-	}
+  type CategoryIDetail {
+    id: Int!
+    category: String!
+    svg: String!
+  }
 
-	input FilmInput {
-		type: String!
-		titleOG: String!
-		title: String!
-		year: Int!
-		note: Float!
-		language: Boolean!
-		favorite: Boolean!
-		category: Int!
-		info: String!
-		poster: String!
-		season: Int!
-		link: String!
-		saga: Int!
-	}
+  type SagaIDetail {
+    id: Int!
+    saga: String!
+    svg: String!
+  }
+  type Page {
+    totalItems: Int
+    size: Int
+    totalPages: Int
+    currentPage: Int
+  }
 
-	input FilmInputUpdate {
-		type: String
-		titleOG: String
-		title: String
-		year: Int
-		note: Float
-		language: Boolean
-		favorite: Boolean
-		category: Int
-		info: String
-		poster: String
-		season: Int
-		link: String
-		saga: Int
-	}
+  type FilmData {
+    id: Int
+    type: String
+    titleOG: String
+    title: String
+    year: Int
+    note: Float
+    language: Boolean
+    favorite: Boolean
+    category: CategoryIDetail
+    info: String
+    poster: String
+    season: Int
+    link: String
+    saga: SagaIDetail
+  }
+  type FilmDetail {
+    data: FilmData
+    error: Boolean
+  }
 
-	type Mutation {
-		createFilm(filmInput: FilmInput): FilmDetail!
-		createFilms(filmsInput: [FilmInput]): String!
-		updateFilm(filmId: Int!, filmInput: FilmInputUpdate): FilmDetail!
-		deleteFilm(filmId: Int!): String!
-	}
+  type FilmsDetail {
+    data: [FilmData]
+    page: Page
+    error: Boolean
+  }
+  type MessageDetail {
+    message: String
+    error: Boolean
+  }
 
-	type Query {
-		getFilmById(filmId: Int!): FilmDetail!
-		getFilmByTitle(filmTitle: String): [FilmDetail!]
-		getFilms: [FilmDetail!]
-		getFilmsByType(filmsType: String): [FilmDetail!]
-		getFilmsByYear(filmsYear: Int, filmsOrder: String): [FilmDetail!]
-		getFilmsByNote(filmsNote: Float, filmsOrder: String): [FilmDetail!]
-		getFilmsByCategory(filmsCategory: String): [FilmDetail!]
-		getFilmsByLanguage(filmsLanguage: Boolean): [FilmDetail!]
-		getFilmsByFavorite(filmsFavorite: Boolean): [FilmDetail!]
-		getFilmsBySaga(filmsSaga: String): [FilmDetail!]
-		getFilmsByTypeAndYear(filmsType: String, filmsYear: Int, filmsOrder: String): [FilmDetail!]
-		getFilmsByTypeAndNote(filmsType: String, filmsNote: Float, filmsOrder: String): [FilmDetail!]
-		getFilmsByTypeAndCategory(filmsType: String, filmsCategory: Int): [FilmDetail!]
-		getFilmsByTypeAndLanguage(filmsType: String, filmsLanguage: Boolean): [FilmDetail!]
-		getFilmsByTypeAndFavorite(filmsType: String, filmsFavorite: Boolean): [FilmDetail!]
-	}
+  type Mutation {
+    createFilm(filmInput: FilmInput): FilmDetail!
+    createFilms(filmsInput: [FilmInput]): MessageDetail!
+    updateFilm(filmId: Int!, filmInput: FilmInputUpdate): FilmDetail!
+    deleteFilm(filmId: Int!): MessageDetail!
+  }
+
+  type Query {
+    getFilmById(filmId: Int!): FilmDetail!
+    getFilmByTitle(filmTitle: String): FilmsDetail!
+    getFilms(page: Int): FilmsDetail!
+    getFilmsByType(filmsType: String,page: Int): FilmsDetail!
+    getFilmsByYear(filmsYear: Int, filmsOrder: String,page: Int): FilmsDetail!
+    getFilmsByNote(filmsNote: Float, filmsOrder: String,page: Int): FilmsDetail!
+    getFilmsByCategory(filmsCategory: String,page: Int): FilmsDetail!
+    getFilmsByLanguage(filmsLanguage: Boolean,page: Int): FilmsDetail!
+    getFilmsByFavorite(filmsFavorite: Boolean,page: Int): FilmsDetail!
+    getFilmsBySaga(filmsSaga: String,page: Int): FilmsDetail!
+    getFilmsByTypeAndYear(
+      filmsType: String
+      filmsYear: Int
+      filmsOrder: String,page: Int
+    ): FilmsDetail!
+    getFilmsByTypeAndNote(
+      filmsType: String
+      filmsNote: Float
+      filmsOrder: String,page: Int
+    ): FilmsDetail!
+    getFilmsByTypeAndCategory(
+      filmsType: String
+      filmsCategory: Int,page: Int
+    ): FilmsDetail!
+    getFilmsByTypeAndLanguage(
+      filmsType: String
+      filmsLanguage: Boolean,page: Int
+    ): FilmsDetail!
+    getFilmsByTypeAndFavorite(
+      filmsType: String
+      filmsFavorite: Boolean,page: Int
+    ): FilmsDetail!
+  }
 `;
 module.exports = filmTypeDefs;

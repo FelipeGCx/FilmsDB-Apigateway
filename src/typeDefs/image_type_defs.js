@@ -1,9 +1,5 @@
 const { gql } = require('apollo-server');
 const imageTypeDefs = gql`
-	type imageDetail {
-		base64: String
-	}
-
 	input imageInput {
 		name: String!
 		size_x: Int!
@@ -12,6 +8,10 @@ const imageTypeDefs = gql`
 		base64: String!
 	}
 
+	type imageDetail {
+		base64: String
+	}
+	
 	type Mutation {
 		resizeImage(imageInput: imageInput!): String!
 	}
