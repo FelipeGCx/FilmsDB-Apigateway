@@ -32,13 +32,13 @@ const filmTypeDefs = gql`
     saga: Int
   }
 
-  type CategoryDetail {
+  type CategoryIDetail {
     id: Int!
     category: String!
     svg: String!
   }
 
-  type SagaDetail {
+  type SagaIDetail {
     id: Int!
     saga: String!
     svg: String!
@@ -51,20 +51,20 @@ const filmTypeDefs = gql`
   }
 
   type FilmData {
-    id: Int!
-    type: String!
-    titleOG: String!
-    title: String!
-    year: Int!
-    note: Float!
-    language: Boolean!
-    favorite: Boolean!
-    category: CategoryDetail!
-    info: String!
-    poster: String!
-    season: Int!
-    link: String!
-    saga: SagaDetail!
+    id: Int
+    type: String
+    titleOG: String
+    title: String
+    year: Int
+    note: Float
+    language: Boolean
+    favorite: Boolean
+    category: CategoryIDetail
+    info: String
+    poster: String
+    season: Int
+    link: String
+    saga: SagaIDetail
   }
   type FilmDetail {
     data: FilmData

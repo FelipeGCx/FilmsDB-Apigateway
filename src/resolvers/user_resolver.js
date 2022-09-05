@@ -1,10 +1,10 @@
 const userResolver = {
   Mutation: {
     loginUser: (_, { userInput }, { dataSources }) => {
-      return dataSources.userAPI.loginUser();
+      return dataSources.userAPI.loginUser(userInput);
     },
     signupUser: (_, { userInput }, { dataSources }) => {
-      return dataSources.userAPI.signupUser();
+      return dataSources.userAPI.signupUser(userInput);
     },
   },
 };

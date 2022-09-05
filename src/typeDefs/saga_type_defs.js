@@ -4,13 +4,17 @@ const sagaTypeDefs = gql`
     saga: String!
     svg: String!
   }
-  type Data {
+  type SagaData {
     id: Int!
     saga: String!
     svg: String!
   }
   type SagaDetail {
-    data: Data
+    data: SagaData
+    error: Boolean
+  }
+  type SagasDetail {
+    data: [SagaData]
     error: Boolean
   }
   type StringResponse {
@@ -25,7 +29,7 @@ const sagaTypeDefs = gql`
 
   type Query {
     getSaga(sagaId: Int!): SagaDetail!
-    getSagas: [SagaDetail!]
+    getSagas: SagasDetail!
   }
 `;
 module.exports = sagaTypeDefs;

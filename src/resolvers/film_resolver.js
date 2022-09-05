@@ -78,12 +78,14 @@ const filmResolver = {
 			}
 			return dataFinal;
 		},
-		getFilms: async (_, __, { dataSources }) => {
-			let data = await dataSources.filmAPI.getFilms();
-			let dataFinal = [];
-
-			for (let index = 0; index < data.length; index++) {
-				const film = data[index];
+		getFilms: async (_, { page }, { dataSources }) => {
+			let result = await dataSources.filmAPI.getFilms(page);
+			let sagas = await dataSources.sagaAPI.getSagas();
+			console.log(sagas);
+			let categories = await dataSources.categoryAPI.getCategories();
+			console.log(categories);
+			let dataComplete = [];
+			result.data.forEach(film => {
 				let saga = {
 					id: 0,
 					saga: ' ',
@@ -95,10 +97,17 @@ const filmResolver = {
 					svg: ' '
 				};
 				if (film.saga != 0) {
-					saga = dataSources.sagaAPI.getSaga(film.saga);
+					let sagaR = sagas.data[film.saga - 1]
+					console.log(sagaR)
+					saga.id = sagaR.id;
+					saga.saga = sagaR.saga;
+					saga.svg = sagaR.svg;
 				}
 				if (film.category != 0) {
-					category = dataSources.categoryAPI.getCategory(film.category);
+					let categoryR = categories.data[film.category - 1]
+					category.id = categoryR.id;
+					category.category = categoryR.category;
+					category.svg = categoryR.svg;
 				}
 				const filme = {
 					id: film.id,
@@ -116,9 +125,10 @@ const filmResolver = {
 					link: film.link,
 					saga: saga
 				};
-				dataFinal.push(filme);
-			}
-			return dataFinal;
+				dataComplete.push(filme);
+			});
+			result.data = dataComplete;
+			return result;
 		},
 		getFilmsByType: async (_, { filmsType }, { dataSources }) => {
 			let data = [];

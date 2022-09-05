@@ -1,15 +1,15 @@
 const { gql } = require("apollo-server");
 const userTypeDefs = gql`
-  inpu UserInput {
+  input UserInput {
     username: String!
     password: String!
   }
-  inpu SingUpInput {
+  input SingUpInput {
     username: String!
     email: String!
     password: String!
   }
-  type Data {
+  type UserData {
     id: String
     username: String
     email: String
@@ -18,7 +18,7 @@ const userTypeDefs = gql`
     tokenType: String
   }
   type UserDetail{
-    data: Data
+    data: UserData
     error: Boolean
   }
 
