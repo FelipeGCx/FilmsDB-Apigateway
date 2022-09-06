@@ -8,7 +8,7 @@ class FilmAPI extends RESTDataSource {
   async getFilmById(filmId) {
     return await this.get(`/film/id/${filmId}`);
   }
-  async getFilmByTitle(filmTitle, page) {
+  async getFilmByTitle(filmTitle) {
     return await this.get(`/film/title/${filmTitle}`);
   }
   async getFilms(page) {

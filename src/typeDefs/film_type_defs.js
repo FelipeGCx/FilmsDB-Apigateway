@@ -70,6 +70,10 @@ const filmTypeDefs = gql`
     data: FilmData
     error: Boolean
   }
+  type FilmTDetail{
+    data: [FilmData]
+    error: Boolean
+  }
 
   type FilmsDetail {
     data: [FilmData]
@@ -90,7 +94,7 @@ const filmTypeDefs = gql`
 
   type Query {
     getFilmById(filmId: Int!): FilmDetail!
-    getFilmByTitle(filmTitle: String): FilmsDetail!
+    getFilmByTitle(filmTitle: String): FilmTDetail!
     getFilms(page: Int): FilmsDetail!
     getFilmsByType(filmsType: String,page: Int): FilmsDetail!
     getFilmsByYear(filmsYear: Int, filmsOrder: String,page: Int): FilmsDetail!
