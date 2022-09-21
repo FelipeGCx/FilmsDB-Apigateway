@@ -14,8 +14,8 @@ const userTypeDefs = gql`
     username: String
     email: String
     roles: [String]
-    accessToken: String
     tokenType: String
+    accessToken: String
   }
   type UserDetail{
     data: UserData
@@ -23,8 +23,8 @@ const userTypeDefs = gql`
   }
 
   type Mutation {
-    loginUser(userInput: UserInput!): UserDetail!
-    signupUser(userInput: SingUpInput!): UserDetail!
+    loginUser(userInput: UserInput): UserDetail!
+    signupUser(userInput: SingUpInput): UserDetail!
   }
 `;
 module.exports = userTypeDefs;

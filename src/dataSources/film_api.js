@@ -67,7 +67,7 @@ class FilmAPI extends RESTDataSource {
   async createFilm(film) {
     return await this.post(`/create/film`, film);
   }
-  async createFilms(films, page) {
+  async createFilms(films) {
     return await this.post(`/create/films`, films);
   }
   async updateFilm(filmId, film) {

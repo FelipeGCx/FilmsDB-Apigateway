@@ -13,12 +13,12 @@ const authentication = async ({ req }) => {
 				body: JSON.stringify({ token }),
 				redirect: 'follow'
 			};
-			let response = await fetch(`${serverConfig.auth_api_url}/verifyToken/`, requestOptions);
+			let response = await fetch(`${serverConfig.auth_api_url}/verifytoken`, requestOptions);
 			if (response.status != 200) {
 				console.log(response);
 				throw new ApolloError(`SESION INACTIVA - ${401}` + response.status, 401);
 			}
-			return { userIdToken: (await response.json()).UserId };
+			return { userIdToken: (await response.json()).data.id };
 		} catch (error) {
 			throw new ApolloError(`TOKEN ERROR: ${500}: ${error}`, 500);
 		}
