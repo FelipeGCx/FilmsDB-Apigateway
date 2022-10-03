@@ -85,6 +85,16 @@ const filmTypeDefs = gql`
     error: Boolean
   }
 
+  type ChartsData{
+    type: String
+    elements: Int
+  }
+
+  type ChartsDetail {
+    data: [ChartsData]
+    error: Boolean
+  }
+
   type Mutation {
     createFilm(filmInput: FilmInput): FilmDetail!
     createFilms(filmsInput: [FilmInput]): MessageDetail!
@@ -96,7 +106,8 @@ const filmTypeDefs = gql`
     getFilmById(filmId: Int!): FilmDetail!
     getFilmByTitle(filmTitle: String): FilmTDetail!
     getFilms(page: Int): FilmsDetail!
-    getFilmsByType(filmsType: String,page: Int): FilmsDetail!
+    getFilmsByType(filmsType: String, filmsYear:Int, filmsNote: String, page: Int): FilmsDetail!
+    getCharts: ChartsDetail!
     getFilmsByYear(filmsYear: Int, filmsOrder: String,page: Int): FilmsDetail!
     getFilmsByNote(filmsNote: Float, filmsOrder: String,page: Int): FilmsDetail!
     getFilmsByCategory(filmsCategory: String,page: Int): FilmsDetail!
