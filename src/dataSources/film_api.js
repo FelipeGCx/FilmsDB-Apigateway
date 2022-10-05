@@ -16,7 +16,7 @@ class FilmAPI extends RESTDataSource {
   }
   async getFilmsByType(filmsType, filmsYear, filmsNote, page) {
     return await this.get(
-      `/films/type=${filmsType}?year=${filmsYear}&${filmsNote}&page=${page}`
+      `/films/type=${filmsType}?year=${filmsYear}&note=${filmsNote}&page=${page}`
     );
   }
   async getCharts() {
