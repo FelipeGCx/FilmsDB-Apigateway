@@ -11,14 +11,12 @@ const authentication = async ({ req }) => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ token }),
-        // redirect: 'follow'
+        redirect: 'follow'
       };
-      // console.log("option", requestOptions);
       let response = await fetch(
         `${serverConfig.films_api_url}/auth/verifytoken`,
         requestOptions
       );
-      //   console.log("the response", await response.json());
       if (response.status != 200) {
         throw new ApolloError(
           `SESION INACTIVA - ${401}` + response.status,
@@ -26,7 +24,6 @@ const authentication = async ({ req }) => {
         );
       }
       response = await response.json();
-    //   console.log("the response", response.data);
       return { user: response.data };
     } catch (error) {
       throw new ApolloError(`TOKEN ERROR: ${500}: ${error}`, 500);
