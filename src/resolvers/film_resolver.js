@@ -234,7 +234,7 @@ const filmResolver = {
     },
   },
   Mutation: {
-    createFilm: (_, { filmInput }, { dataSources }) => {
+    createFilm: (_, { filmInput }, { dataSources, user }) => {
       const film = {
         type: filmInput.type,
         titleOG: filmInput.titleOG,
@@ -250,12 +250,12 @@ const filmResolver = {
         link: filmInput.link,
         saga: filmInput.saga,
       };
-      return dataSources.filmAPI.createFilm(film);
+      return dataSources.filmAPI.createFilm(film,user.accessToken);
     },
     createFilms: (_, { filmsInput }, { dataSources }) => {
       return dataSources.filmAPI.createFilms(filmsInput);
     },
-    updateFilm: (_, { filmId, filmInput }, { dataSources }) => {
+    updateFilm: (_, { filmId, filmInput }, { dataSources, user }) => {
       const film = {
         type: filmInput.type || null,
         titleOG: filmInput.titleOG || null,
@@ -271,10 +271,10 @@ const filmResolver = {
         link: filmInput.link || null,
         saga: filmInput.saga || null,
       };
-      return dataSources.filmAPI.updateFilm(filmId, film);
+      return dataSources.filmAPI.updateFilm(filmId, film, user.accessToken);
     },
-    deleteFilm: (_, { filmId }, { dataSources }) => {
-      return dataSources.filmAPI.deleteFilm(filmId);
+    deleteFilm: (_, { filmId }, { dataSources ,user}) => {
+      return dataSources.filmAPI.deleteFilm(filmId, user.accessToken);
     },
   },
 };

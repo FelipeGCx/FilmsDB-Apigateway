@@ -69,17 +69,25 @@ class FilmAPI extends RESTDataSource {
       `/films/type=${filmsType}/favorite=${filmsFavorite}?page=${page}`
     );
   }
-  async createFilm(film) {
-    return await this.post(`/create/film`, film);
+  async createFilm(film, tokenAccess) {
+    return await this.post(`/create/film`, film, {
+      headers: { Authorization: ` Bearer ${tokenAccess}` },
+    });
   }
-  async createFilms(films) {
-    return await this.post(`/create/films`, films);
+  async createFilms(films, tokenAccess) {
+    return await this.post(`/create/films`, films, {
+      headers: { Authorization: ` Bearer ${tokenAccess}` },
+    });
   }
-  async updateFilm(filmId, film) {
-    return await this.put(`/update/film/${filmId}`, film);
+  async updateFilm(filmId, film, tokenAccess) {
+    return await this.put(`/update/film/${filmId}`, film, {
+      headers: { Authorization: ` Bearer ${tokenAccess}` },
+    });
   }
-  async deleteFilm(filmId) {
-    return await this.delete(`/delete/film/${filmId}`);
+  async deleteFilm(filmId, tokenAccess) {
+    return await this.delete(`/delete/film/${filmId}`, null, {
+      headers: { Authorization: ` Bearer ${tokenAccess}` },
+    });
   }
 }
 module.exports = FilmAPI;
