@@ -25,6 +25,7 @@ const userTypeDefs = gql`
   type Mutation {
     loginUser(userInput: UserInput): UserDetail!
     signupUser(userInput: SingUpInput): UserDetail!
+    verifyToken(token:String): UserDetail!
   }
 `;
 module.exports = userTypeDefs;

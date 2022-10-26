@@ -11,5 +11,8 @@ class UserAPI extends RESTDataSource {
   async signupUser(user) {
     return await this.post("/auth/signup", user);
   }
+  async verifyToken(token) {
+    return await this.post("/auth/verifytoken", token);
+  }
 }
 module.exports = UserAPI;
