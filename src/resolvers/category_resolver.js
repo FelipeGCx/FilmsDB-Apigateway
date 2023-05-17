@@ -21,8 +21,8 @@ const categoryResolver = {
       { dataSources, user }
     ) => {
       const category = {
-        category: categoryInput.category || null,
-        svg: categoryInput.svg || null,
+        category: categoryInput.category ?? null,
+        svg: categoryInput.svg ?? null,
       };
       return dataSources.categoryAPI.updateCategory(
         categoryId,
