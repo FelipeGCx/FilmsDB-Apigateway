@@ -17,8 +17,8 @@ const sagaResolver = {
     },
     updateSaga: (_, { sagaId, sagaInput }, { dataSources, user }) => {
       const saga = {
-        saga: sagaInput.saga || null,
-        svg: sagaInput.svg || null,
+        saga: sagaInput.saga ?? null,
+        svg: sagaInput.svg ?? null,
       };
       return dataSources.sagaAPI.updateSaga(sagaId, saga, user.accessToken);
     },
