@@ -1,11 +1,5 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "npm run start",
-      "use": "@vercel/node"
-    }
-  ],
   "rewrites": [{ "source": "/(.*)", "destination": "/api" }],
   "headers": [
     {
